@@ -1,0 +1,52 @@
+#+TITLE: Paper Reader
+#+AUTHOR: RJ Sheperd
+
+** Setup
+*** Installation
+
+**** MELPA:
+
+#+BEGIN_SRC 
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; Comment/uncomment this line to enable MELPA Stable if desired.
+;; See `package-archive-priorities` and `package-pinned-packages`.
+;; Most users will not need or want to do this.
+;; (add-to-list 'package-archives
+;;              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(package-initialize)
+#+END_SRC
+
+Then use ~M-x package-install paper-reader~
+
+**** init.el
+
+You can add ~paper-reader~ to your ~init.el~ file using [[https://elpa.gnu.org/packages/use-package.html][use-package]]:
+
+#+BEGIN_SRC elisp
+    ;; Ensure use-package is installed
+    (unless (package-installed-p 'use-package)
+      (package-refresh-contents)
+      (package-install 'use-package))
+
+    ;; Install paper-reader
+    (use-package paper-reader
+      :ensure t
+      :config
+      ;; Recommended keybindings
+      (global-set-key (kbd "C-c i a") 'paper-add)
+      (global-set-key (kbd "C-c i i") 'paper-add-at-point))
+#+END_SRC
+
+*** Add your credentials to ~/.authinfo.gpg
+
+1. [[https://www.masteringemacs.org/article/keeping-secrets-in-emacs-gnupg-auth-sources][Set up your ~/.authinfo.gpg file]]
+2. Add your credentials:
+#+BEGIN_SRC 
+machine instapaper.com login <EMAIL> password <PASSWORD>
+#+END_SRC
+
+** Usage
+
+- ~M-x paper-add / C-c i a~ to add a URL to Instapaper
+- ~M-x paper-add-at-point / C-c i i~ to add the URL your cursor is on to Instapaper (works in Org, Elfeed, w3m and eww)

@@ -34,16 +34,26 @@
 ;; - browse-url
 
 ;; Installation:
-;; 
-;; (use-package paper-reader)
+;; - From MELPA: ~M-x package-install paper-reader~
+;; - Ensure use-package is installed
+;;   (unless (package-installed-p 'use-package)
+;;     (package-refresh-contents)
+;;     (package-install 'use-package))
+
+;; - Add this to your init.el
+;;   (use-package paper-reader
+;;     :ensure t
+;;     :config
+;;     ;; Recommended keybindings
+;;     (global-set-key (kbd "C-c i a") 'paper-add)
+;;     (global-set-key (kbd "C-c i i") 'paper-add-at-point))
+;;
+;; - Add your credentials to ~/.authinfo.gpg
+;; machine instapaper.com login <EMAIL> password <PASSWORD>
 
 ;; Usage
-;; To save a url to read later, use `M-x paper-add` or `M-x paper-add-at-point'
-
-;; Recommended keybindings:
-;; 
-;; (global-set-key (kbd "C-c i i") 'paper-add-at-point)
-;; (global-set-key (kbd "C-c i a") 'paper-add))
+;; - ~M-x paper-add / C-c i a~ to add a URL to Instapaper
+;; - ~M-x paper-add-at-point / C-c i i~ to add the URL your cursor is on to Instapaper (works in Org, Elfeed, w3m and eww)
 
 ;; Note that passwords are not required on instapaper. You must have
 ;; an instapaper account to use this package; it will not create one
