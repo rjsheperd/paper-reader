@@ -89,12 +89,12 @@
     (goto-char (point-min))
     (when (re-search-forward "HTTP/[0-9].[0-9] \\([0-9]+\\)" nil t)
       (let ((status-code   (string-to-number (match-string 1)))
-	    (response-body (buffer-substring-no-properties (point-min) (point-max))))
-	(if (< status-code 300)
-	    (message "Saved to Instapaper! (%s)" url)
-	  (message "[ERROR] STATUS: '%s' \n\n RESPONSE: '%s'" status-code response-code))))))
+            (response-body (buffer-substring-no-properties (point-min) (point-max))))
+        (if (< status-code 300)
+            (message "Saved to Instapaper! (%s)" url)
+          (message "[ERROR] STATUS: '%s' \n\n RESPONSE: '%s'" status-code response-body))))))
 
-(defun paper-reader-lib-add (url &optional title selection)
+(defun paper-reader-lib-add (url)
   "Add url to instapaper"
   (let* ((api-key-pair (car (auth-source-search :max 1 :host "instapaper.com" :require '(:user :secret))))
          (paper-reader-username (plist-get api-key-pair :user))
@@ -141,7 +141,7 @@
   "Add link at point to Instapaper in Org buffers."
   (interactive)
   (if-let ((url (when (org-in-regexp org-bracket-link-regexp 1)
-                    (org-link-unescape (match-string-no-properties 1)))))
+                  (org-link-unescape (match-string-no-properties 1)))))
       (paper-reader-lib-add url)
     (paper-reader-generic-add-link)))
 
@@ -201,7 +201,7 @@ This is only for the elfeed-search buffer, not for entry buffers."
     (interactive)
     (when-let ((entries (elfeed-search-selected))
                (links (mapcar #'elfeed-entry-link entries)))
-      (mapcar #'paper-reader-lib-add-url links)))
+      (mapcar #'paper-reader-lib-add links)))
 
   (defun paper-reader-elfeed-entry-add-link ()
     "Add links for selected entries in elfeed-show-mode buffer to Instapaper.
