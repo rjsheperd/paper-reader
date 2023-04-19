@@ -2,6 +2,7 @@
 #+AUTHOR: RJ Sheperd
 
 ** Setup
+
 *** Installation
 
 **** MELPA:
@@ -34,8 +35,8 @@ You can add ~paper-reader~ to your ~init.el~ file using [[https://elpa.gnu.org/p
       :ensure t
       :config
       ;; Recommended keybindings
-      (global-set-key (kbd "C-c i a") 'paper-add)
-      (global-set-key (kbd "C-c i i") 'paper-add-at-point))
+      (global-set-key (kbd "C-c i a") 'paper-reader-add)
+      (global-set-key (kbd "C-c i i") 'paper-reader-add-at-point))
 #+END_SRC
 
 *** Add your credentials to ~/.authinfo.gpg
@@ -48,5 +49,5 @@ machine instapaper.com login <EMAIL> password <PASSWORD>
 
 ** Usage
 
-- ~M-x paper-add / C-c i a~ to add a URL to Instapaper
-- ~M-x paper-add-at-point / C-c i i~ to add the URL your cursor is on to Instapaper (works in Org, Elfeed, w3m and eww)
+- ~M-x paper-reader-add / C-c i a~ to add a URL to Instapaper
+- ~M-x paper-reader-add-at-point / C-c i i~ to add the URL your cursor is on to Instapaper (works in Org, Elfeed, w3m and eww)
